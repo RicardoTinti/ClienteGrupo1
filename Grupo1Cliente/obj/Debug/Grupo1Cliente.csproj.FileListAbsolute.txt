@@ -1,0 +1,8 @@
+c:\users\rick\documents\visual studio 2010\Projects\ClienteGrupo1\Grupo1Cliente\bin\Grupo1Cliente.dll
+c:\users\rick\documents\visual studio 2010\Projects\ClienteGrupo1\Grupo1Cliente\bin\Grupo1Cliente.pdb
+c:\users\rick\documents\visual studio 2010\Projects\ClienteGrupo1\Grupo1Cliente\obj\Debug\Grupo1Cliente.dll
+c:\users\rick\documents\visual studio 2010\Projects\ClienteGrupo1\Grupo1Cliente\obj\Debug\Grupo1Cliente.pdb
+c:\users\rick\documents\visual studio 2010\Projects\ClienteGrupo1\Grupo1Cliente\bin\Newtonsoft.Json.dll
+c:\users\rick\documents\visual studio 2010\Projects\ClienteGrupo1\Grupo1Cliente\bin\Newtonsoft.Json.pdb
+c:\users\rick\documents\visual studio 2010\Projects\ClienteGrupo1\Grupo1Cliente\bin\Newtonsoft.Json.xml
+c:\users\rick\documents\visual studio 2010\Projects\ClienteGrupo1\Grupo1Cliente\obj\Debug\Grupo1Cliente.csprojResolveAssemblyReference.cache
