@@ -16,137 +16,75 @@ namespace Grupo1Cliente.Controllers
     public class CorredoresController : Controller
     {
 
-        public IFormsAuthenticationService FormsService { get; set; }
-        public IMembershipService MembershipService { get; set; }
-
-        protected override void Initialize(RequestContext requestContext)
+        public ActionResult Index()
         {
-            if (FormsService == null) { FormsService = new FormsAuthenticationService(); }
-            if (MembershipService == null) { MembershipService = new AccountMembershipService(); }
+            ViewData["Message"] = "Corredores";
 
-            base.Initialize(requestContext);
+            List<CorredoresModel> corredores = Corredores.RecuperaCorredores();
+            return View(corredores);
         }
 
-        // **************************************
-        // URL: /Account/LogOn
-        // **************************************
+        public ActionResult Details(int id)
+        {
+            CorredoresModel corredor = Corredores.RecuperaCorredor(id);
 
-        public ActionResult LogOn()
+            return View(corredor);
+        }
+
+        [HttpGet]
+        public ActionResult Create()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult LogOn(LogOnModel model, string returnUrl)
+        public ActionResult Create(CorredoresModel corredor)
         {
-            if (ModelState.IsValid)
+            Corredores.CadastraCorredor(corredor);
+
+            List<CorredoresModel> corredores = Corredores.RecuperaCorredores();
+
+            return View("Index", corredores);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            CorredoresModel c = RetornaCorredor(id);
+
+            return View(c);
+        }
+
+        private CorredoresModel RetornaCorredor(int id)
+        {
+            foreach (CorredoresModel c in Corredores.RecuperaCorredores())
             {
-                if (MembershipService.ValidateUser(model.UserName, model.Password))
-                {
-                    FormsService.SignIn(model.UserName, model.RememberMe);
-                    if (!String.IsNullOrEmpty(returnUrl))
-                    {
-                        return Redirect(returnUrl);
-                    }
-                    else
-                    {
-                        return RedirectToAction("Index", "Home");
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError("", "The user name or password provided is incorrect.");
-                }
+                if (c.id == Convert.ToString(id))
+                    return c;
             }
 
-            // If we got this far, something failed, redisplay form
-            return View(model);
-        }
-
-        // **************************************
-        // URL: /Account/LogOff
-        // **************************************
-
-        public ActionResult LogOff()
-        {
-            FormsService.SignOut();
-
-            return RedirectToAction("Index", "Home");
-        }
-
-        // **************************************
-        // URL: /Account/Register
-        // **************************************
-
-        public ActionResult Register()
-        {
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
-            return View();
+            return null;
         }
 
         [HttpPost]
-        public ActionResult Register(RegisterModel model)
+        public ActionResult Edit(CorredoresModel corredor)
         {
-            if (ModelState.IsValid)
-            {
-                // Attempt to register the user
-                MembershipCreateStatus createStatus = MembershipService.CreateUser(model.UserName, model.Password, model.Email);
 
-                if (createStatus == MembershipCreateStatus.Success)
-                {
-                    FormsService.SignIn(model.UserName, false /* createPersistentCookie */);
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    ModelState.AddModelError("", AccountValidation.ErrorCodeToString(createStatus));
-                }
-            }
+            Corredores.AtualizaCorredor(corredor);
 
-            // If we got this far, something failed, redisplay form
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
-            return View(model);
+            List<CorredoresModel> corredores = Corredores.RecuperaCorredores();
+
+            return View("Index", corredores);
         }
 
-        // **************************************
-        // URL: /Account/ChangePassword
-        // **************************************
-
-        [Authorize]
-        public ActionResult ChangePassword()
+        public ActionResult Delete(int id)
         {
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
-            return View();
-        }
 
-        [Authorize]
-        [HttpPost]
-        public ActionResult ChangePassword(ChangePasswordModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                if (MembershipService.ChangePassword(User.Identity.Name, model.OldPassword, model.NewPassword))
-                {
-                    return RedirectToAction("ChangePasswordSuccess");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "The current password is incorrect or the new password is invalid.");
-                }
-            }
+            Corredores.ExcluiCorredor(id);
 
-            // If we got this far, something failed, redisplay form
-            ViewData["PasswordLength"] = MembershipService.MinPasswordLength;
-            return View(model);
-        }
+            List<CorredoresModel> corredores = Corredores.RecuperaCorredores();
 
-        // **************************************
-        // URL: /Account/ChangePasswordSuccess
-        // **************************************
-
-        public ActionResult ChangePasswordSuccess()
-        {
-            return View();
+            return View("Index", corredores);
         }
 
     }

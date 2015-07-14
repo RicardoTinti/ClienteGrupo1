@@ -22,8 +22,6 @@ Inherits="System.Web.Mvc.ViewPage<Grupo1Cliente.Controllers.DetalhesCorrida>" %>
 
         <tr>
             <td>
-                <%= Html.ActionLink("Editar", "Edit", new { id = item.id })%>
-                <%= Html.ActionLink("Detalhes", "Details", new { id = item.id })%>
             </td>
             <td><%= Html.Encode(item.nome) %></td>
             <td>Status: <%= Html.Encode(item.status) %></td>

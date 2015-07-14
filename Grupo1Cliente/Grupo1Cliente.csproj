@@ -88,6 +88,10 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="Temp.aspx" />
+    <Content Include="Views\Corredores\Create.aspx" />
+    <Content Include="Views\Corredores\Details.aspx" />
+    <Content Include="Views\Corredores\Edit.aspx" />
+    <Content Include="Views\Corredores\Index.aspx" />
     <Content Include="Views\Home\Create.aspx" />
     <Content Include="Views\Home\Details.aspx" />
     <Content Include="Views\Home\Edit.aspx" />
